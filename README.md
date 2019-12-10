@@ -33,7 +33,7 @@ curl -v localhost:4000/4niy2
 ## Development
 
 ### Key decisions and challenges
-* I decided to use Sinatra rather than Rails to develop this program due to its scope and size, and that it would not be using any databases. My key challenge developing this program was that I did not have experience testing json requests/responses in a Sinatra framework, and have only previously done this in Rails. With more time, I would have liked to improve the test coverage of my Sinatra app file.
+* I decided to use Sinatra rather than Rails to develop this program due to its scope and size, and that it would not be using any databases. My key challenge developing this program was that I did not have experience testing json requests/responses in a Sinatra framework, and have only [previously done this in Rails](https://github.com/nateg101/acebook-by-WinkyFace/blob/master/spec/controllers/api/v1/posts_controller_spec.rb). With more time, I would have liked to improve the test coverage of my Sinatra app file.
 * After spending some time exploring different ways to store the temporary url data, including sessions, .json files, .yaml files, I ended up using a class variable as I was having issues adding and retrieving data to/from a file. This was not ideal, and again with more time I would have liked to find a better solution for this - ideally using a temporary .json file.
 
 ### Testing
