@@ -12,18 +12,19 @@ describe UrlShortener do
       get '/'
       expect(last_response.status).to eq 200
     end
-
-    it 'gets a message' do
-      get '/'
-      expect(last_response.body).to eq 'Send a post request to shorten your URL'
-    end
   end
 
   context 'POST /' do
-    # it "includes the original url" do
-    #   # data = '{"short_url":"short_url","url":"http://www.farmdrop.com"}'
-    #   post "/"
-    #   expect(last_response.body).to eq 'hello'
-    # end
+    it 'returns ok' do
+      post '/', params: { url: 'hello' }
+      expect(last_response.body).to include 'hello'
+    end
+  end
+
+  context 'GET /:url' do
+    it 'returns status 200' do
+      get '/12abc'
+      expect(last_response.status).to eq 301
+    end
   end
 end

@@ -6,7 +6,7 @@ require './lib/url_entry'
 
 class UrlShortener < Sinatra::Base
   get '/' do
-    'Send a post request to shorten your URL'
+    erb :index
   end
 
   post '/' do

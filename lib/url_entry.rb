@@ -33,7 +33,7 @@ class URLEntry
   end
 
   def check_protocol(url)
-    protocol =  url.split('www')[0]
+    protocol = url.split('www')[0]
     protocol.empty? ? "http://#{url}" : url
   end
 end
