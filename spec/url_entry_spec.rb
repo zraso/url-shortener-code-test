@@ -26,7 +26,7 @@ describe URLEntry do
     it 'saves entry to data hash' do
       allow(url_entry).to receive(:short_url) { '12abc' }
       url_entry.json_response
-      expect(URLEntry.data["12abc"]).to eq "www.farmdrop.com"
+      expect(URLEntry.data['12abc']).to eq 'https://www.farmdrop.com'
     end
   end
 
@@ -34,8 +34,19 @@ describe URLEntry do
     it 'given a short url string, it finds the full url' do
       allow(url_entry).to receive(:short_url) { '12abc' }
       url_entry.json_response
-      expect(URLEntry.retrieve('12abc')).to eq "www.farmdrop.com"
+      expect(URLEntry.retrieve('12abc')).to eq 'https://www.farmdrop.com'
     end
   end
 
+  describe '#check_protocol' do
+    it 'adds protocol if none included in request' do
+      new_entry = URLEntry.new('www.farmdrop.com')
+      expect(new_entry.url).to eq 'https://www.farmdrop.com'
+    end
+
+    it 'does not add protocol if already given' do
+      new_entry = URLEntry.new('https://www.farmdrop.com')
+      expect(new_entry.url).to eq 'https://www.farmdrop.com'
+    end
+  end
 end
