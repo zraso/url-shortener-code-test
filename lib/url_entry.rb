@@ -1,0 +1,2 @@
+class URLEntry
+end
