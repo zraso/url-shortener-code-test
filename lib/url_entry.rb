@@ -8,6 +8,10 @@ class URLEntry
     @@data
   end
 
+  def self.retrieve(url_params)
+    return @@data[url_params]
+  end
+
   attr_reader :url
 
   def initialize(url)
@@ -17,11 +21,11 @@ class URLEntry
 
   def json_response
     save
-    { short_url: short_url, url: url }.to_json
+    { short_url: @short_url, url: @url }.to_json
   end
 
   def save
-    @@data[short_url] = @url
+    entry = @@data[short_url] = @url
   end
 
   def short_url

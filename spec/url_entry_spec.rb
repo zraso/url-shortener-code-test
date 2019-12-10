@@ -30,4 +30,12 @@ describe URLEntry do
     end
   end
 
+  describe '#self.retrieve' do
+    it 'given a short url string, it finds the full url' do
+      allow(url_entry).to receive(:short_url) { '12abc' }
+      url_entry.json_response
+      expect(URLEntry.retrieve('12abc')).to eq "www.farmdrop.com"
+    end
+  end
+
 end

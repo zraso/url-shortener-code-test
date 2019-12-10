@@ -15,5 +15,10 @@ class UrlShortener < Sinatra::Base
     @entry.json_response
   end
 
+  get '/:url' do
+    url = URLEntry.retrieve(params[:url])
+    redirect url, 301
+  end
+
   run! if app_file == $PROGRAM_NAME
 end
