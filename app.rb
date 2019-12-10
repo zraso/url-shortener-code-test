@@ -10,7 +10,8 @@ class UrlShortener < Sinatra::Base
 
   post '/' do
     req = JSON.parse(request.body.read)
-    { :short_url => URLEntry.short_url, :url => req["url"] }.to_json
+    @entry = URLEntry.new(req["url"])
+    @entry.json_response
   end
 
   run! if app_file == $0
