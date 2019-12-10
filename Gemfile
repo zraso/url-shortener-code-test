@@ -2,8 +2,8 @@
 
 source 'https://rubygems.org'
 
-gem 'rspec'
 gem 'rack-test'
+gem 'rspec'
 gem 'rubocop'
 gem 'simplecov'
 gem 'simplecov-console'
