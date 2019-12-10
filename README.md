@@ -9,10 +9,10 @@ This app is a URL shortening service which accepts a post request with the URL y
 * Run `rackup -p 4000` to start up the server
 
 ## Using the app
-1. Request a shortened URL
+1. Request a shortened URL (with or without including 'http' protocol)
 
 ```
-curl localhost:4000 -XPOST -d '{ "url": "http://www.farmdrop.com" }'
+curl localhost:4000 -XPOST -d '{ "url": "www.farmdrop.com" }'
 { "short_url": "/4niy2", "url": "http://www.farmdrop.com" }
 ```
 
