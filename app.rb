@@ -1,5 +1,6 @@
 require 'sinatra/base'
 require 'json'
+require './lib/url_entry'
 
 class UrlShortener < Sinatra::Base 
 
@@ -9,7 +10,7 @@ class UrlShortener < Sinatra::Base
 
   post '/' do
     req = JSON.parse(request.body.read)
-    { :short_url => 'short_url', :url => req["url"] }.to_json
+    { :short_url => URLEntry.short_url, :url => req["url"] }.to_json
   end
 
   run! if app_file == $0
