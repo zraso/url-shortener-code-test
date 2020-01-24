@@ -26,7 +26,7 @@ describe URLEntry do
     it 'saves entry to data hash' do
       allow(url_entry).to receive(:short_url) { '12abc' }
       url_entry.json_response
-      expect(URLEntry.data['12abc']).to eq 'http://www.farmdrop.com'
+      expect(URLEntry.data['12abc']).to eq ['http://www.farmdrop.com', 0]
     end
   end
 
@@ -35,6 +35,13 @@ describe URLEntry do
       allow(url_entry).to receive(:short_url) { '12abc' }
       url_entry.json_response
       expect(URLEntry.retrieve('12abc')).to eq 'http://www.farmdrop.com'
+    end
+
+    it 'adds to the counter when a short url is accessed' do
+      allow(url_entry).to receive(:short_url) { '12abc' }
+      url_entry.json_response
+      URLEntry.retrieve('12abc')
+      expect(URLEntry.data['12abc']).to eq ['http://www.farmdrop.com', 1]
     end
   end
 
@@ -47,6 +54,14 @@ describe URLEntry do
     it 'does not add protocol if already given' do
       new_entry = URLEntry.new('http://www.farmdrop.com')
       expect(new_entry.url).to eq 'http://www.farmdrop.com'
+    end
+  end
+
+  describe '#counter' do
+    it 'adds to the url counter each time a short url is visited' do
+      allow(url_entry).to receive(:short_url) { '12abc' }
+      url_entry.json_response
+      expect(URLEntry.data['12abc']).to eq ['http://www.farmdrop.com', 0]
     end
   end
 end

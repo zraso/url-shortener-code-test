@@ -8,7 +8,8 @@ class URLEntry
   end
 
   def self.retrieve(url_params)
-    @@data[url_params]
+    @@data[url_params][1] += 1
+    @@data[url_params][0]
   end
 
   attr_reader :url
@@ -24,7 +25,7 @@ class URLEntry
   end
 
   def save
-    @@data[short_url] = @url
+    @@data[short_url] = [@url, 0]
   end
 
   def short_url

@@ -10,14 +10,32 @@ class UrlShortener < Sinatra::Base
   end
 
   post '/' do
-    req = JSON.parse(request.body.read)
-    @entry = URLEntry.new(req['url'])
-    @entry.json_response
+
+    req = check_json(request.body.read)
+
+    # return status 400 if req.is_a? Integer
+
+    if req.key?('url')
+      @entry = URLEntry.new(req['url'])
+      @entry.json_response
+    else
+      return status 400
+    end
+
+
   end
 
   get '/:url' do
     url = URLEntry.retrieve(params[:url])
     redirect url, 301
+  end
+
+  def check_json(request)
+    begin
+      JSON.parse(request)
+    rescue JSON::ParserError
+      { }
+    end
   end
 
   run! if app_file == $PROGRAM_NAME
